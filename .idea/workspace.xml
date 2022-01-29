@@ -4,6 +4,7 @@
     <list default="true" id="3015f0f3-f432-485d-a0bc-30e6ddbb3a49" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FoodCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FoodCard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +14,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -52,7 +53,7 @@
       <workItem from="1643324505035" duration="41000" />
       <workItem from="1643324582827" duration="479000" />
       <workItem from="1643326087503" duration="293000" />
-      <workItem from="1643327164585" duration="9803000" />
+      <workItem from="1643327164585" duration="10633000" />
     </task>
     <servers />
   </component>

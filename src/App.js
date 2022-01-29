@@ -7,13 +7,14 @@ import Register from "./pages/Register";
 import AddFood from "./pages/AddFood";
 import FoodCard from "./components/FoodCard";
 import DietCard from "./components/DietCard";
+import Home from "./pages/Home";
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
                 <TopAppBar/>
-                <DietCard/>
+                <Home/>
             </div>
         </ThemeProvider>
     );

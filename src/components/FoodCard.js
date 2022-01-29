@@ -9,7 +9,7 @@ const FoodCard = () => {
     const [diet, setDiet] = useState("")
     return (
         <div className="FoodCard">
-            <Card sx={{maxWidth: "400px", margin: "50px auto"}}>
+            <Card sx={{maxWidth: "400px", margin: "0 auto"}}>
                 <CardContent>
                     <Typography variant="h2" sx={{fontSize: "24px", fontWeight: "500"}} my={3}>
                         Boiled sweet potatoes
