@@ -4,9 +4,9 @@ import {Card, CardContent, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 
 const Register = () => {
-    const [email, setEmail] = useState()
-    const [pw, setPw] = useState()
-    const [pw2, setPw2] = useState()
+    const [email, setEmail] = useState("")
+    const [pw, setPw] = useState("")
+    const [pw2, setPw2] = useState("")
     return (
         <div className="Register">
             <Card sx={{maxWidth: "500px", margin: "50px auto"}}>

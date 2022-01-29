@@ -4,8 +4,8 @@ import {Card, CardContent, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 
 const Login = () => {
-    const [email, setEmail] = useState()
-    const [pw, setPw] = useState()
+    const [email, setEmail] = useState("")
+    const [pw, setPw] = useState("")
     return (
         <div className="Login">
             <Card sx={{maxWidth: "500px", margin: "50px auto"}}>
