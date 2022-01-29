@@ -6,13 +6,14 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AddFood from "./pages/AddFood";
 import FoodCard from "./components/FoodCard";
+import DietCard from "./components/DietCard";
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
                 <TopAppBar/>
-                <FoodCard/>
+                <DietCard/>
             </div>
         </ThemeProvider>
     );
