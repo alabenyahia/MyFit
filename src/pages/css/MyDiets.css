@@ -1,5 +1,5 @@
-.Home {
-    max-width: 1320px;
+.MyDiets {
+    max-width: 1280px;
     margin: 50px 0;
     display: flex;
     flex-wrap: wrap;
@@ -7,6 +7,6 @@
     align-items: center;
 }
 
-.Home > div {
+.MyDiets > div {
     margin: 20px;
 }

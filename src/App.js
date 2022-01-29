@@ -8,13 +8,14 @@ import AddFood from "./pages/AddFood";
 import FoodCard from "./components/FoodCard";
 import DietCard from "./components/DietCard";
 import Home from "./pages/Home";
+import MyDiets from "./pages/MyDiets";
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
                 <TopAppBar/>
-                <Home/>
+                <MyDiets/>
             </div>
         </ThemeProvider>
     );
