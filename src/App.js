@@ -9,13 +9,14 @@ import FoodCard from "./components/FoodCard";
 import DietCard from "./components/DietCard";
 import Home from "./pages/Home";
 import MyDiets from "./pages/MyDiets";
+import EditFoodCard from "./components/EditFoodCard";
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
                 <TopAppBar/>
-                <MyDiets/>
+                <EditFoodCard/>
             </div>
         </ThemeProvider>
     );
