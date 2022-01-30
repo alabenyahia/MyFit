@@ -1,0 +1,13 @@
+.EditDiet {
+    max-width: 1320px;
+    margin: 50px 0;
+
+}
+
+.EditDiet__FoodCards {
+    margin: 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
