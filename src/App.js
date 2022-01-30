@@ -18,7 +18,7 @@ function App() {
         <ThemeProvider theme={theme}>
             <div className="App">
                 <TopAppBar/>
-                <EditDiet/>
+                <AddFood/>
             </div>
         </ThemeProvider>
     );

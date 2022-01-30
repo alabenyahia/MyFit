@@ -1,0 +1,15 @@
+
+
+@media screen and (max-width: 560px) {
+    h2 {
+        font-size: 28px !important;
+    }
+    .AddFood__textfields {
+        margin-right: 0 !important;
+        width: 100% !important;
+    }
+
+    .AddFood__textfields:nth-child(8) {
+        margin-top: 20px !important;
+    }
+}
