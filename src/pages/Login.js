@@ -6,6 +6,44 @@ import Button from "@mui/material/Button";
 const Login = () => {
     const [email, setEmail] = useState("")
     const [pw, setPw] = useState("")
+
+    const [emailErr, setEmailErr] = useState("")
+    const [pwErr, setPwErr] = useState("")
+
+    function resetErrors() {
+        setEmailErr("")
+        setPwErr("")
+    }
+
+    function resetFields() {
+        setEmail("")
+        setPw("")
+    }
+
+    function isDataValid() {
+        if  (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            setEmailErr("Email is invalid");
+            return false;
+        }
+
+        if (pw.length < 6 ) {
+            setPwErr("Password length must be more than 5")
+            return false;
+        }
+
+        return true
+    }
+
+    function handleLogin(e) {
+        e.preventDefault();
+        resetErrors()
+        if (isDataValid()) {
+            console.log("dooone")
+            resetFields()
+        } else {
+            console.log("not done")
+        }
+    }
     return (
         <div className="Login">
             <Card sx={{maxWidth: "500px", margin: "50px auto"}}>
@@ -13,12 +51,16 @@ const Login = () => {
                     <Typography variant="h2" sx={{fontSize: "36px", fontWeight: "500"}} my={3} align="center">
                         Login
                     </Typography>
-                    <form>
+                    <form onSubmit={handleLogin}>
                         <TextField id="email"
+                                   error={emailErr.length>0}
+                                   helperText={emailErr}
                                    label="Email address" fullWidth
                                    sx={{marginBottom: "20px"}} value={email}
                         onChange={(e) => setEmail(e.target.value)}/>
                         <TextField id="password"
+                                   error={pwErr.length>0}
+                                   helperText={pwErr}
                                    label="Password" fullWidth
                                    value={pw}
                                    type="password"

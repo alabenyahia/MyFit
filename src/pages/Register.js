@@ -17,7 +17,13 @@ const Register = () => {
         setPwErr("")
         setPw2Err("")
     }
-    function isDataValide() {
+    function resetFields() {
+        setEmail("")
+        setPw("")
+        setPw2("")
+    }
+
+    function isDataValid() {
         if  (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
             setEmailErr("Email is invalid");
             return false;
@@ -43,8 +49,9 @@ const Register = () => {
     function handleRegister(e) {
         e.preventDefault();
         resetErrors()
-        if (isDataValide()) {
+        if (isDataValid()) {
             console.log("dooone")
+            resetFields()
         } else {
             console.log("not done")
         }
