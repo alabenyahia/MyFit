@@ -7,6 +7,49 @@ const Register = () => {
     const [email, setEmail] = useState("")
     const [pw, setPw] = useState("")
     const [pw2, setPw2] = useState("")
+
+    const [emailErr, setEmailErr] = useState("")
+    const [pwErr, setPwErr] = useState("")
+    const [pw2Err, setPw2Err] = useState("")
+
+    function resetErrors() {
+        setEmailErr("")
+        setPwErr("")
+        setPw2Err("")
+    }
+    function isDataValide() {
+        if  (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            setEmailErr("Email is invalid");
+            return false;
+        }
+
+        if (pw.length < 6 ) {
+            setPwErr("Password length must be more than 5")
+            return false;
+        }
+        if (pw2.length < 6) {
+            setPw2Err("Password validation length must be more than 5")
+            return false;
+        }
+
+        if (pw !== pw2) {
+            setPwErr("Passwords don't match")
+            return false;
+        }
+
+        return true
+    }
+
+    function handleRegister(e) {
+        e.preventDefault();
+        resetErrors()
+        if (isDataValide()) {
+            console.log("dooone")
+        } else {
+            console.log("not done")
+        }
+    }
+
     return (
         <div className="Register">
             <Card sx={{maxWidth: "500px", margin: "50px auto"}}>
@@ -14,20 +57,26 @@ const Register = () => {
                     <Typography variant="h2" sx={{fontSize: "36px", fontWeight: "500"}} my={3} align="center">
                         Register
                     </Typography>
-                    <form>
+                    <form onSubmit={handleRegister}>
                         <TextField id="email"
+                                   error={emailErr.length>0}
+                                   helperText={emailErr}
                                    label="Email address" fullWidth
                                    sx={{marginBottom: "20px"}} value={email}
                                    onChange={(e) => setEmail(e.target.value)}/>
                         <TextField id="password"
+                                   error={pwErr.length>0}
+                                   helperText={pwErr}
                                    label="Password" fullWidth
                                    sx={{marginBottom: "20px"}} value={pw}
                                    type="password"
                                    onChange={(e) => setPw(e.target.value)}/>
 
                         <TextField id="password2"
+                                   error={pw2Err.length>0}
+                                   helperText={pw2Err}
                                    label="Repeat password" fullWidth
-                                   value={pw}
+                                   value={pw2}
                                    type="password"
                                    onChange={(e) => setPw2(e.target.value)}/>
 
