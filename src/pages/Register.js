@@ -1,7 +1,11 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Typography from "@mui/material/Typography";
 import {Card, CardContent, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import {auth} from "../config/firebase";
+import {UserContext} from "../context/UserContext";
+
 
 const Register = () => {
     const [email, setEmail] = useState("")
@@ -11,6 +15,8 @@ const Register = () => {
     const [emailErr, setEmailErr] = useState("")
     const [pwErr, setPwErr] = useState("")
     const [pw2Err, setPw2Err] = useState("")
+
+    const { user, setUser } = useContext(UserContext);
 
     function resetErrors() {
         setEmailErr("")
@@ -50,10 +56,18 @@ const Register = () => {
         e.preventDefault();
         resetErrors()
         if (isDataValid()) {
-            console.log("dooone")
+
+            createUserWithEmailAndPassword(auth, email, pw)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    setUser(user)
+                    console.log("dooone")
+                })
+                .catch((error) => {
+                    console.log(error.code, error.message)
+                });
+
             resetFields()
-        } else {
-            console.log("not done")
         }
     }
 

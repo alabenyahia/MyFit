@@ -1,3 +1,4 @@
+import {useState} from "react";
 import './App.css';
 import TopAppBar from "./components/TopAppBar";
 import {ThemeProvider} from "@mui/material";
@@ -13,14 +14,21 @@ import EditFoodCard from "./components/EditFoodCard";
 import DietCardTotals from "./components/DietCardTotals";
 import EditDiet from "./pages/EditDiet";
 import "./config/firebase"
+import {UserContext} from "./context/UserContext";
+
 
 function App() {
+    const [user, setUser] = useState(null);
+
     return (
         <ThemeProvider theme={theme}>
-            <div className="App">
-                <TopAppBar/>
-                <Login/>
-            </div>
+            <UserContext.Provider value={{user, setUser}}>
+                <div className="App">
+                    <TopAppBar/>
+                    <Register/>
+                    {JSON.stringify(user, null, 2)}
+                </div>
+            </UserContext.Provider>
         </ThemeProvider>
     );
 }
