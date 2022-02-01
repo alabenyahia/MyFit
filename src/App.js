@@ -12,6 +12,7 @@ import MyDiets from "./pages/MyDiets";
 import EditFoodCard from "./components/EditFoodCard";
 import DietCardTotals from "./components/DietCardTotals";
 import EditDiet from "./pages/EditDiet";
+import "./config/firebase"
 
 function App() {
     return (
