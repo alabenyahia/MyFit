@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import './App.css';
 import TopAppBar from "./components/TopAppBar";
 import {ThemeProvider} from "@mui/material";
@@ -15,10 +15,23 @@ import DietCardTotals from "./components/DietCardTotals";
 import EditDiet from "./pages/EditDiet";
 import "./config/firebase"
 import {UserContext} from "./context/UserContext";
+import { onAuthStateChanged } from "firebase/auth";
+import {auth} from "./config/firebase";
+
 
 
 function App() {
     const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user)
+            } else {
+                // User is signed out
+            }
+        });
+    }, [])
 
     return (
         <ThemeProvider theme={theme}>
