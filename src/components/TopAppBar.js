@@ -15,7 +15,8 @@ import {useContext} from "react";
 import {UserContext} from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
-const pages = ['Login', 'Register', 'Logout'];
+const pagesIfNotLoggedIn = ['Login', 'Register'];
+const pagesIfLoggedIn = ['Home', 'Add Food', 'My Diets', 'Logout'];
 
 const TopAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -96,11 +97,19 @@ const TopAppBar = () => {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={() => handleMenuClick(page)}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
-                            ))}
+                            {user?
+                                pagesIfLoggedIn.map((page) => (
+                                    <MenuItem key={page} onClick={() => handleMenuClick(page)}>
+                                        <Typography textAlign="center">{page}</Typography>
+                                    </MenuItem>
+                                )) :
+                                pagesIfNotLoggedIn.map((page) => (
+                                    <MenuItem key={page} onClick={() => handleMenuClick(page)}>
+                                        <Typography textAlign="center">{page}</Typography>
+                                    </MenuItem>
+                                ))
+                            }
+
                         </Menu>
                     </Box>
                     <Typography
@@ -112,15 +121,27 @@ const TopAppBar = () => {
                         MyFit.tn
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={() => handleMenuClick(page)}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
-                        ))}
+                        {user ?
+                            pagesIfLoggedIn.map((page) => (
+                                <Button
+                                    key={page}
+                                    onClick={() => handleMenuClick(page)}
+                                    sx={{ my: 2, color: 'white', display: 'block' }}
+                                >
+                                    {page}
+                                </Button>
+                            )) :
+
+                            pagesIfNotLoggedIn.map((page) => (
+                                <Button
+                                    key={page}
+                                    onClick={() => handleMenuClick(page)}
+                                    sx={{ my: 2, color: 'white', display: 'block' }}
+                                >
+                                    {page}
+                                </Button>
+                            ))
+                        }
                     </Box>
 
                 </Toolbar>
