@@ -13,12 +13,17 @@ const Login = () => {
     const [emailErr, setEmailErr] = useState("")
     const [pwErr, setPwErr] = useState("")
 
+    const [loginErr, setLoginErr] = useState("")
+
+
+
     const { user, setUser } = useContext(UserContext);
 
 
     function resetErrors() {
         setEmailErr("")
         setPwErr("")
+        setLoginErr("")
     }
 
     function resetFields() {
@@ -51,7 +56,13 @@ const Login = () => {
                     console.log("dooone")
                 })
                 .catch((error) => {
-                    console.log(error.code, error.message)
+                    if (error.code === 'auth/user-not-found') {
+                        setLoginErr("User not found")
+                    }
+                    if (error.code === 'auth/wrong-password') {
+                        setLoginErr("Wrong password")
+                    }
+
                 });
 
             resetFields()
@@ -78,9 +89,14 @@ const Login = () => {
                                    value={pw}
                                    type="password"
                                    onChange={(e) => setPw(e.target.value)}/>
+                        {
+                            loginErr.length>0 &&
+                            <Typography variant="body1" component="p" align="center" sx={{marginTop: "20px", color:"#d32f2f"}}>{loginErr}</Typography>
+                        }
+
 
                         <Button variant="contained" type="submit" fullWidth
-                                sx={{marginTop: "24px", marginBottom: "8px"}}>Login</Button>
+                                sx={{marginTop: "20px", marginBottom: "8px"}}>Login</Button>
                         <Typography variant="p" sx={{fontSize: "12px", fontWeight: "400"}}>
                             Not a member?<span style={{color: "#0090DC"}}> Register now!</span>
                         </Typography>
