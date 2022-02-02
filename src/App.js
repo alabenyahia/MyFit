@@ -15,9 +15,9 @@ import DietCardTotals from "./components/DietCardTotals";
 import EditDiet from "./pages/EditDiet";
 import "./config/firebase"
 import {UserContext} from "./context/UserContext";
-import { onAuthStateChanged } from "firebase/auth";
+import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "./config/firebase";
-
+import {BrowserRouter as Router} from "react-router-dom"
 
 
 function App() {
@@ -36,11 +36,13 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <UserContext.Provider value={{user, setUser}}>
-                <div className="App">
-                    <TopAppBar/>
-                    <Login/>
-                    {JSON.stringify(user, null, 2)}
-                </div>
+                <Router>
+                    <div className="App">
+                        <TopAppBar/>
+                        <Login/>
+                        {JSON.stringify(user, null, 2)}
+                    </div>
+                </Router>
             </UserContext.Provider>
         </ThemeProvider>
     );

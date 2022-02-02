@@ -13,6 +13,7 @@ import { signOut } from "firebase/auth";
 import {auth} from "../config/firebase";
 import {useContext} from "react";
 import {UserContext} from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const pages = ['Login', 'Register', 'Logout'];
 
@@ -20,6 +21,7 @@ const TopAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const { user, setUser } = useContext(UserContext);
 
+    const navigate = useNavigate()
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -41,6 +43,12 @@ const TopAppBar = () => {
         switch (page) {
             case 'Logout':
                 logoutUser()
+                break;
+            case 'Login':
+                navigate('/login');
+                break;
+            case 'Register':
+                navigate('/register');
                 break;
         }
     }
