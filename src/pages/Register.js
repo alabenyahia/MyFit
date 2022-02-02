@@ -107,7 +107,8 @@ const Register = () => {
                         <Button variant="contained" type="submit" fullWidth
                                 sx={{marginTop: "24px", marginBottom: "8px"}}>Register</Button>
                         <Typography variant="p" sx={{fontSize: "12px", fontWeight: "400"}}>
-                            Already a member?<span style={{color: "#0090DC"}}> Login</span>
+                            Already a member?<span style={{color: "#0090DC", cursor: "pointer"}}
+                        onClick={() => navigate('/login')}> Login</span>
                         </Typography>
                     </form>
                 </CardContent>
