@@ -51,6 +51,15 @@ const TopAppBar = () => {
             case 'Register':
                 navigate('/register');
                 break;
+            case 'Home':
+                navigate('/');
+                break;
+            case 'Add Food':
+                navigate('/addfood');
+                break;
+            case 'My Diets':
+                navigate('/mydiets');
+                break;
         }
     }
 

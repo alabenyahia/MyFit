@@ -18,6 +18,7 @@ import {UserContext} from "./context/UserContext";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "./config/firebase";
 import {BrowserRouter as Router} from "react-router-dom"
+import Routing from "./components/Routing";
 
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
                 <Router>
                     <div className="App">
                         <TopAppBar/>
-                        <Login/>
+                        <Routing/>
                         {JSON.stringify(user, null, 2)}
                     </div>
                 </Router>

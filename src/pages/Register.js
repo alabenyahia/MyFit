@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../config/firebase";
 import {UserContext} from "../context/UserContext";
-
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
     const [email, setEmail] = useState("")
@@ -17,6 +17,8 @@ const Register = () => {
     const [pw2Err, setPw2Err] = useState("")
 
     const { user, setUser } = useContext(UserContext);
+
+    const navigate = useNavigate()
 
     function resetErrors() {
         setEmailErr("")
@@ -71,6 +73,7 @@ const Register = () => {
         }
     }
 
+    if (user) navigate('/')
     return (
         <div className="Register">
             <Card sx={{maxWidth: "500px", margin: "50px auto"}}>

@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../config/firebase";
 import {UserContext} from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("")
@@ -16,8 +17,9 @@ const Login = () => {
     const [loginErr, setLoginErr] = useState("")
 
 
-
     const { user, setUser } = useContext(UserContext);
+
+    const navigate = useNavigate()
 
 
     function resetErrors() {
@@ -68,6 +70,8 @@ const Login = () => {
             resetFields()
         }
     }
+
+    if (user) navigate('/')
     return (
         <div className="Login">
             <Card sx={{maxWidth: "500px", margin: "50px auto"}}>
