@@ -38,7 +38,7 @@ function App() {
             <UserContext.Provider value={{user, setUser}}>
                 <div className="App">
                     <TopAppBar/>
-                    <Register/>
+                    <Login/>
                     {JSON.stringify(user, null, 2)}
                 </div>
             </UserContext.Provider>
