@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import "./css/AddFood.css"
 import {Card, CardContent, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import {UserContext} from "../context/UserContext";
+import {Navigate} from "react-router-dom";
 
 const AddFood = () => {
     const [name, setName] = useState("")
@@ -14,6 +16,10 @@ const AddFood = () => {
     const [fat, setFat] = useState("")
     const [price, setPrice] = useState("")
     const [imgUrl, setImgUrl] = useState("")
+
+    const { user, setUser } = useContext(UserContext);
+
+    if (!user) return <Navigate to="/login" replace />
     return (
         <div className="AddFood">
             <Card sx={{maxWidth: "950px", margin: "50px auto"}}>
