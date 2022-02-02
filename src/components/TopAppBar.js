@@ -9,11 +9,17 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import { signOut } from "firebase/auth";
+import {auth} from "../config/firebase";
+import {useContext} from "react";
+import {UserContext} from "../context/UserContext";
 
-const pages = ['Login', 'Register'];
+const pages = ['Login', 'Register', 'Logout'];
 
 const TopAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const { user, setUser } = useContext(UserContext);
+
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -22,6 +28,22 @@ const TopAppBar = () => {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
+
+    function logoutUser() {
+        signOut(auth).then(() => {
+            setUser(null)
+        }).catch((error) => {
+            console.log(error)
+        });
+    }
+
+    const handleMenuClick = (page) => {
+        switch (page) {
+            case 'Logout':
+                logoutUser()
+                break;
+        }
+    }
 
 
     return (
@@ -67,7 +89,7 @@ const TopAppBar = () => {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                <MenuItem key={page} onClick={() => handleMenuClick(page)}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
@@ -85,7 +107,7 @@ const TopAppBar = () => {
                         {pages.map((page) => (
                             <Button
                                 key={page}
-                                onClick={handleCloseNavMenu}
+                                onClick={() => handleMenuClick(page)}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
                                 {page}
