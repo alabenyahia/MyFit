@@ -26,6 +26,7 @@ const AddFood = () => {
     const [proteinErr, setProteinErr] = useState("")
     const [fatErr, setFatErr] = useState("")
     const [priceErr, setPriceErr] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const { user, setUser } = useContext(UserContext);
 
@@ -39,6 +40,16 @@ const AddFood = () => {
         setProteinErr("")
         setFatErr("")
         setPriceErr("")
+    }
+
+    function resetValues() {
+        setName("")
+        setQty("")
+        setUnit("")
+        setCarb("")
+        setProtein("")
+        setFat("")
+        setPrice("")
     }
 
     function validateData() {
@@ -78,11 +89,12 @@ const AddFood = () => {
         e.preventDefault();
         resetErrors()
         if (validateData()) {
-            const data = {}
-
-            await addDoc(collection(firestore, "foods"), {
-
-            });
+            const data = {name, quantity: parseFloat(qty), unit, carb: parseFloat(carb),
+                protein: parseFloat(protein), fat: parseFloat(fat), price: parseFloat(price)}
+            setLoading(true)
+            await addDoc(collection(firestore, "foods"), data);
+            setLoading(false)
+            resetValues()
         }
 
     }
@@ -153,7 +165,7 @@ const AddFood = () => {
                                    onChange={(e) => setPrice(e.target.value)}/>
 
                         <Box textAlign='center'>
-                            <Button variant="contained" type="submit"
+                            <Button variant="contained" type="submit" disabled={loading}
                                     sx={{marginTop: "24px", marginBottom: "8px", width: "49%"}}>Add</Button>
 
                         </Box>
