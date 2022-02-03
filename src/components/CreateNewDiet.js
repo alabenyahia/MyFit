@@ -2,9 +2,42 @@ import React, {useState} from 'react';
 import {Card, CardContent, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import {addDoc, collection} from "firebase/firestore";
+import {firestore} from "../config/firebase";
 
 const CreateNewDiet = () => {
-    const [name, setName] = useState();
+    const [name, setName] = useState("");
+    const [nameErr, setNameErr] = useState("");
+    const [loading, setLoading] = useState(false)
+
+    function validateData() {
+        if (name.length===0) {
+            setNameErr("Name must not be empty")
+            return false;
+        }
+
+        return true;
+    }
+
+    function resetErrors() {
+        setNameErr("")
+    }
+
+    function resetValues() {
+        setName("")
+    }
+
+    async function handleDietCreation(e) {
+        console.log("ddddd")
+        e.preventDefault();
+        resetErrors()
+        if (validateData()) {
+            setLoading(true)
+            await addDoc(collection(firestore, "diets"), {name});
+            setLoading(false)
+            resetValues()
+        }
+    }
     return (
         <div>
             <Card sx={{maxWidth: "600px", margin: "0 auto"}}>
@@ -13,12 +46,15 @@ const CreateNewDiet = () => {
                         Create new diet
                     </Typography>
 
-                    <form>
+                    <form onSubmit={handleDietCreation}>
                         <TextField id="name" label="Diet name" variant="outlined"
+                                   error={nameErr.length>0}
+                                   helperText={nameErr}
                                    value={name} onChange={(e) => setName(e.target.value)} fullWidth/>
+                        <Button variant="contained" type="submit" fullWidth
+                                disabled={loading}
+                                sx={{marginTop: "20px", marginBottom: "8px"}}>Create</Button>
                     </form>
-                    <Button variant="contained" type="submit" fullWidth
-                            sx={{marginTop: "20px", marginBottom: "8px"}}>Create</Button>
                 </CardContent>
             </Card>
         </div>
