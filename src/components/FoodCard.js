@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
-const FoodCard = () => {
+const FoodCard = ({name, quantity, unit: foodUnit, protein, carb, fat, price}) => {
     const [unit, setUnit] = useState("")
     const [diet, setDiet] = useState("")
     return (
@@ -12,7 +12,7 @@ const FoodCard = () => {
             <Card sx={{maxWidth: "400px", margin: "0 auto"}}>
                 <CardContent>
                     <Typography variant="h2" sx={{fontSize: "24px", fontWeight: "500"}} my={3}>
-                        Boiled sweet potatoes
+                        {name}
                     </Typography>
 
 
@@ -20,12 +20,12 @@ const FoodCard = () => {
                         <Typography variant="h4" sx={{fontSize: "18px", fontWeight: "500",
                             color: "rgba(0, 0, 0, 0.5)", marginBottom: "12px"}}
                                     my={3}>
-                            Nutrients per 100g
+                            Nutrients per {quantity}{foodUnit}
                         </Typography>
                         <ul>
-                            <li>proteins: 18.5g</li>
-                            <li>carbs: 73.12g</li>
-                            <li>fats: 8g</li>
+                            <li>proteins: {protein}g</li>
+                            <li>carbs: {carb}g</li>
+                            <li>fats: {fat}g</li>
                             <li>price: 2360 millimes</li>
                         </ul>
 
@@ -35,9 +35,9 @@ const FoodCard = () => {
                             Price per 1g
                         </Typography>
                         <ul>
-                            <li>proteins: 433.33 millimes</li>
-                            <li>carbs: 122.90 millimes</li>
-                            <li>fats: 20.12 millimes</li>
+                            <li>proteins: {(price/protein).toFixed(2)} millimes</li>
+                            <li>carbs: {(price/carb).toFixed(2)} millimes</li>
+                            <li>fats: {(price/fat).toFixed(2)} millimes</li>
                         </ul>
                     </div>
                     <hr style={{margin: "30px 0", opacity: "0.35"}}/>
