@@ -14,16 +14,19 @@ const MyDiets = () => {
 
     useEffect(() => {
 
-        const q = query(collection(firestore, "diets"), where("user", "==", user.uid));
+        /*const q = query(collection(firestore, "diets"), where("user", "==", user.uid));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 setDiets([...diets, doc.data()])
             });
         });
 
-        return unsubscribe
+        return unsubscribe*/
 
+        return onSnapshot(collection(firestore, "diets"), (snapshot) => {
+            setDiets([...snapshot.docs.map((doc) => doc.data())])
 
+        })
     },[])
 
     if (!user) return <Navigate to="/login" replace/>
