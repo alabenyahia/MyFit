@@ -14,19 +14,21 @@ const MyDiets = () => {
 
     useEffect(() => {
 
-        /*const q = query(collection(firestore, "diets"), where("user", "==", user.uid));
+        const q = query(collection(firestore, "diets"), where("user", "==", user.uid.toString()));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const diets = [];
             querySnapshot.forEach((doc) => {
-                setDiets([...diets, doc.data()])
+                diets.push(doc.data());
             });
+
+            setDiets(diets)
+            console.log("Current cities in CA: ", diets.join(", "));
         });
 
-        return unsubscribe*/
-
-        return onSnapshot(collection(firestore, "diets"), (snapshot) => {
+        /*return onSnapshot(collection(firestore, "diets"), (snapshot) => {
             setDiets([...snapshot.docs.map((doc) => doc.data())])
 
-        })
+        })*/
     },[])
 
     if (!user) return <Navigate to="/login" replace/>
