@@ -90,7 +90,7 @@ const AddFood = () => {
         resetErrors()
         if (validateData()) {
             const data = {name, quantity: parseFloat(qty), unit, carb: parseFloat(carb),
-                protein: parseFloat(protein), fat: parseFloat(fat), price: parseFloat(price)}
+                protein: parseFloat(protein), fat: parseFloat(fat), price: parseFloat(price), user: user.uid}
             setLoading(true)
             await addDoc(collection(firestore, "foods"), data);
             setLoading(false)

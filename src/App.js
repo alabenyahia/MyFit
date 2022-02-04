@@ -41,7 +41,6 @@ function App() {
                     <div className="App">
                         <TopAppBar/>
                         <Routing/>
-                        {JSON.stringify(user, null, 2)}
                     </div>
                 </Router>
             </UserContext.Provider>

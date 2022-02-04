@@ -15,7 +15,7 @@ const MyDiets = () => {
     useEffect(() => {
 
         const q = query(collection(firestore, "diets"), where("user", "==", user.uid.toString()));
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        return onSnapshot(q, (querySnapshot) => {
             const diets = [];
             querySnapshot.forEach((doc) => {
                 diets.push(doc.data());
@@ -25,10 +25,7 @@ const MyDiets = () => {
             console.log("Current cities in CA: ", diets.join(", "));
         });
 
-        /*return onSnapshot(collection(firestore, "diets"), (snapshot) => {
-            setDiets([...snapshot.docs.map((doc) => doc.data())])
 
-        })*/
     },[])
 
     if (!user) return <Navigate to="/login" replace/>

@@ -36,7 +36,7 @@ const CreateNewDiet = () => {
         resetErrors()
         if (validateData()) {
             setLoading(true)
-            await addDoc(collection(firestore, "diets"), {name, user: user?.uid});
+            await addDoc(collection(firestore, "diets"), {name, user: user?.uid, dietfood: []});
             setLoading(false)
             resetValues()
         }
