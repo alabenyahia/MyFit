@@ -22,7 +22,7 @@ const MyDiets = () => {
             });
 
             setDiets(diets)
-            console.log("Current cities in CA: ", diets.join(", "));
+            console.log("Current cities in CA: ", diets);
         });
 
 

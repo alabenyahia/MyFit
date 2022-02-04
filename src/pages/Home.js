@@ -10,6 +10,7 @@ import DietCard from "../components/DietCard";
 const Home = () => {
     const { user, setUser } = useContext(UserContext);
     const [foods, setFoods] = useState([])
+    const [diets, setDiets] = useState([])
 
     useEffect(() => {
 
@@ -17,20 +18,31 @@ const Home = () => {
         return onSnapshot(q, (querySnapshot) => {
             const foods = [];
             querySnapshot.forEach((doc) => {
-                foods.push(doc.data());
+                foods.push({id: doc.id, ...doc.data()});
             });
 
             setFoods(foods)
-            console.log("Current cities in CA: ", foods.join(", "));
         });
 
-
     },[])
+
+    useEffect(() => {
+        const q = query(collection(firestore, "diets"), where("user", "==", user.uid.toString()));
+        return onSnapshot(q, (querySnapshot) => {
+            const diets = [];
+            querySnapshot.forEach((doc) => {
+                diets.push({id: doc.id, ...doc.data()});
+            });
+
+            setDiets(diets)
+            console.log("Current cities in CA: ", diets);
+        });
+    }, [])
 
     if (!user) return <Navigate to="/login" replace />
     return (
     <div className="Home">
-        {foods.map((food) => <FoodCard {...food}/>)}
+        {foods.map((food) => <FoodCard {...food} diets={diets}/>)}
     </div>
     );
 
