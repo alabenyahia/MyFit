@@ -1,14 +1,17 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Card, CardContent, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {addDoc, collection} from "firebase/firestore";
 import {firestore} from "../config/firebase";
+import {UserContext} from "../context/UserContext";
 
 const CreateNewDiet = () => {
     const [name, setName] = useState("");
     const [nameErr, setNameErr] = useState("");
     const [loading, setLoading] = useState(false)
+
+    const { user, setUser } = useContext(UserContext);
 
     function validateData() {
         if (name.length===0) {
@@ -33,7 +36,7 @@ const CreateNewDiet = () => {
         resetErrors()
         if (validateData()) {
             setLoading(true)
-            await addDoc(collection(firestore, "diets"), {name});
+            await addDoc(collection(firestore, "diets"), {name, user: user?.uid});
             setLoading(false)
             resetValues()
         }

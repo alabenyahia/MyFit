@@ -1,14 +1,30 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./css/MyDiets.css"
 import DietCard from "../components/DietCard";
 import {UserContext} from "../context/UserContext";
 import {Navigate} from "react-router-dom";
-import DietCardTotals from "../components/DietCardTotals";
 import CreateNewDiet from "../components/CreateNewDiet";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import {firestore} from "../config/firebase";
 
 const MyDiets = () => {
 
     const {user, setUser} = useContext(UserContext);
+    const [diets, setDiets] = useState([])
+
+    useEffect(() => {
+
+        const q = query(collection(firestore, "diets"), where("user", "==", user.uid));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                setDiets([...diets, doc.data()])
+            });
+        });
+
+        return unsubscribe
+
+
+    },[])
 
     if (!user) return <Navigate to="/login" replace/>
     return (
@@ -17,18 +33,7 @@ const MyDiets = () => {
                 <CreateNewDiet/>
             </div>
             <div className="MyDiets__DietCards">
-                <DietCard/>
-                <DietCard/>
-                <DietCard/>
-                <DietCard/>
-                <DietCard/>
-                <DietCard/>
-                <DietCard/>
-                <DietCard/>
-                <DietCard/>
-                <DietCard/>
-                <DietCard/>
-                <DietCard/>
+                {diets.map((diet) => <DietCard {...diet}/>)}
             </div>
         </div>
     );

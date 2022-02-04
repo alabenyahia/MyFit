@@ -4,13 +4,13 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
-const DietCard = () => {
+const DietCard = ({name}) => {
     return (
         <div>
             <Card sx={{maxWidth: "280px", margin: "0 auto"}}>
                 <CardContent>
                     <Typography variant="h3" sx={{fontSize: "24px", fontWeight: "500", margin: "16px 0"}} my={3}>
-                        Diet's name
+                        {name}
                     </Typography>
 
                     <div>
