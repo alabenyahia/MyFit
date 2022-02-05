@@ -22,7 +22,6 @@ const MyDiets = () => {
             });
 
             setDiets(diets)
-            console.log("Current cities in CA: ", diets);
         });
 
 

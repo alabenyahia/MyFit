@@ -42,7 +42,7 @@ const FoodCard = ({id, name, quantity: foodQuantity, unit, protein, carb, fat, p
             const ref = doc(firestore, "diets", diet);
             setLoading(true)
             await updateDoc(ref, {
-                foods: arrayUnion({id, quantity})
+                foods: arrayUnion({id, quantity: parseFloat(quantity)})
             });
             setLoading(false)
         }
