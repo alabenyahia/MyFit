@@ -18,7 +18,7 @@ const MyDiets = () => {
         return onSnapshot(q, (querySnapshot) => {
             const diets = [];
             querySnapshot.forEach((doc) => {
-                diets.push(doc.data());
+                diets.push({id: doc.id, ...doc.data()});
             });
 
             setDiets(diets)

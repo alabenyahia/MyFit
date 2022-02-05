@@ -20,6 +20,11 @@ const FoodCard = ({id, name, quantity: foodQuantity, unit, protein, carb, fat, p
         setQuantityErr("")
         setDietErr("")
     }
+
+    function resetFields() {
+        setDiet("")
+        setQuantity("")
+    }
     function validateData() {
         if (quantity.length===0) {
             setQuantityErr("Quantity must not be empty");
@@ -45,6 +50,7 @@ const FoodCard = ({id, name, quantity: foodQuantity, unit, protein, carb, fat, p
                 foods: arrayUnion({id, quantity: parseFloat(quantity)})
             });
             setLoading(false)
+            resetFields()
         }
     }
     return (
@@ -83,7 +89,7 @@ const FoodCard = ({id, name, quantity: foodQuantity, unit, protein, carb, fat, p
                     <hr style={{margin: "30px 0", opacity: "0.35"}}/>
                     <form onSubmit={handleAddToDiet}>
                         <Box>
-                            <TextField id="unit" label="Grammes" variant="outlined" type="number"
+                            <TextField id="unit" label={unit} variant="outlined" type="number"
                                        error={quantityErr.length>0}
                                        helperText={quantityErr}
                                        value={quantity} onChange={(e) => setQuantity(e.target.value)}

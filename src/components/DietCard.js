@@ -1,13 +1,29 @@
 import React, {useEffect, useState} from 'react';
-import {Card, CardActions, CardContent} from "@mui/material";
+import {
+    Card,
+    CardActions,
+    CardContent,
+} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {collection, onSnapshot, query, where} from "firebase/firestore";
+import {collection, onSnapshot, query, where, doc, deleteDoc} from "firebase/firestore";
 import {firestore} from "../config/firebase";
+import AlertDialog from "./AlertDialog";
 
-const DietCard = ({name, foods: dietFoods}) => {
+
+const DietCard = ({id, name, foods: dietFoods}) => {
 
     const [foods, setFoods] = useState([])
+
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+    const handleDialogOpen = () => {
+        setIsDialogOpen(true);
+    };
+
+    const handleDialogClose = () => {
+        setIsDialogOpen(false);
+    };
 
     useEffect(() => {
         if (!dietFoods || dietFoods?.length===0) return
@@ -45,6 +61,15 @@ const DietCard = ({name, foods: dietFoods}) => {
         return found.quantity;
     }
 
+     function handleDietDeleteDialog() {
+        handleDialogOpen()
+    }
+
+    async function handleDeleteAcceptAfterDialog() {
+        await deleteDoc(doc(firestore, "diets", id));
+        handleDialogClose();
+    }
+
     return (
         <div>
             <Card sx={{maxWidth: "280px", margin: "0 auto"}}>
@@ -66,10 +91,13 @@ const DietCard = ({name, foods: dietFoods}) => {
 
                     <CardActions sx={{paddingBottom: 0}}>
                         <Button size="small">Edit</Button>
-                        <Button size="small">Delete</Button>
+                        <Button size="small" onClick={handleDietDeleteDialog}>Delete</Button>
                     </CardActions>
                 </CardContent>
             </Card>
+
+            <AlertDialog open={isDialogOpen} handleClickOpen={handleDialogOpen}
+                         handleClose={handleDialogClose} handleDelete={handleDeleteAcceptAfterDialog}/>
         </div>
     );
 };
