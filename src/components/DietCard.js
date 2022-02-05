@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import {collection, onSnapshot, query, where, doc, deleteDoc} from "firebase/firestore";
 import {firestore} from "../config/firebase";
 import AlertDialog from "./AlertDialog";
+import {useNavigate} from "react-router-dom";
 
 
 const DietCard = ({id, name, foods: dietFoods}) => {
@@ -24,6 +25,8 @@ const DietCard = ({id, name, foods: dietFoods}) => {
     const handleDialogClose = () => {
         setIsDialogOpen(false);
     };
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (!dietFoods || dietFoods?.length===0) return
@@ -70,6 +73,10 @@ const DietCard = ({id, name, foods: dietFoods}) => {
         handleDialogClose();
     }
 
+    function handleDietEdit() {
+        navigate(`/editdiet/${id}`)
+    }
+
     return (
         <div>
             <Card sx={{maxWidth: "280px", margin: "0 auto"}}>
@@ -90,7 +97,7 @@ const DietCard = ({id, name, foods: dietFoods}) => {
                     <hr style={{margin: "10px 0", opacity: "0.35"}}/>
 
                     <CardActions sx={{paddingBottom: 0}}>
-                        <Button size="small">Edit</Button>
+                        <Button size="small" onClick={handleDietEdit}>Edit</Button>
                         <Button size="small" onClick={handleDietDeleteDialog}>Delete</Button>
                     </CardActions>
                 </CardContent>

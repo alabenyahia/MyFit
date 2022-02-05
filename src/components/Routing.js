@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddFood from "../pages/AddFood";
 import MyDiets from "../pages/MyDiets";
+import EditDiet from "../pages/EditDiet";
 
 const Routing = () => {
     return (
@@ -13,6 +14,7 @@ const Routing = () => {
             <Route path='/register' element={<Register/>}/>
             <Route path='/addfood' element={<AddFood/>}/>
             <Route path='/mydiets' element={<MyDiets/>}/>
+            <Route path='/editdiet/:id' element={<EditDiet/>}/>
             <Route path="/" element={<Home/>}/>
         </Routes>
     );

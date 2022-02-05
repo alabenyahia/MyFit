@@ -1,30 +1,57 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./css/EditDiet.css"
 import DietCardTotals from "../components/DietCardTotals";
 import EditFoodCard from "../components/EditFoodCard";
 import {UserContext} from "../context/UserContext";
 import {Navigate} from "react-router-dom";
+import {useParams} from "react-router-dom";
+import {collection, onSnapshot, query, where} from "firebase/firestore";
+import {firestore} from "../config/firebase";
 
 const EditDiet = () => {
 
     const { user, setUser } = useContext(UserContext);
+    const {id} = useParams();
+
+    const [diet, setDiet] = useState([])
+    const [foods, setFoods] = useState([])
+
+    useEffect(() => {
+
+        const q = query(collection(firestore, "diets"), where("__name__", "==", id));
+        return onSnapshot(q, (querySnapshot) => {
+            const diet1 = [];
+            querySnapshot.forEach((doc) => {
+                diet1.push({id: doc.id, ...doc.data()});
+            });
+
+            setDiet(diet1)
+        });
+
+    },[])
+
+    useEffect(() => {
+        if (diet.length===0 || !diet[0].foods || diet[0].foods?.length===0) return
+        const q = query(collection(firestore, "foods"), where("__name__", "in", diet[0].foods?.map((food => food.id))));
+        return onSnapshot(q, (querySnapshot) => {
+            const foods1 = [];
+            querySnapshot.forEach((doc) => {
+                foods1.push({id: doc.id, ...doc.data()});
+            });
+
+            setFoods(foods1)
+        });
+    }, [diet])
+
 
     if (!user) return <Navigate to="/login" replace />
     return (
         <div className="EditDiet">
             <div className="EditDiet__totals">
-                <DietCardTotals/>
+                <DietCardTotals name={diet[0].name} id={id}/>
             </div>
             <div className="EditDiet__FoodCards">
-                <EditFoodCard/>
-                <EditFoodCard/>
-                <EditFoodCard/>
-                <EditFoodCard/>
-                <EditFoodCard/>
-                <EditFoodCard/>
-                <EditFoodCard/>
-                <EditFoodCard/>
-                <EditFoodCard/>
+                {foods.map((food) => <EditFoodCard {...food}/>)}
             </div>
         </div>
     );
