@@ -46,7 +46,7 @@ const DietCardTotals = ({name: dietName, id}) => {
             foods: []
         });
     }
-    
+
     return (
         <div>
             <Card sx={{maxWidth: "600px", margin: "0 auto"}}>
