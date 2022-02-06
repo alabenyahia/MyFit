@@ -38,12 +38,31 @@ const EditFoodCard = ({id, dietId, name, quantity: foodQuantity, unit, protein, 
             });
             resetFields()
         }
-        
-    }
-
-    function handleRemove() {
 
     }
+
+    async function handleRemove() {
+
+        const docRef = doc(firestore, "diets", dietId);
+        const docSnap = await getDoc(docRef);
+        const dt = docSnap.data().foods
+        dt.splice(dt.findIndex((food) => food.id===id), 1)
+
+        const ref = doc(firestore, "diets", dietId);
+        await updateDoc(ref, {
+            foods: dt
+        });
+
+
+    }
+
+    async function handleClear() {
+        const ref = doc(firestore, "diets", dietId);
+        await updateDoc(ref, {
+            foods: []
+        });
+    }
+
     return (
         <div className="FoodCard">
             <Card sx={{maxWidth: "400px", margin: "20px"}}>
