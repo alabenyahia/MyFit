@@ -39,6 +39,14 @@ const DietCardTotals = ({name: dietName, id}) => {
             resetFields()
         }
     }
+
+    async function handleClear() {
+        const ref = doc(firestore, "diets", id);
+        await updateDoc(ref, {
+            foods: []
+        });
+    }
+    
     return (
         <div>
             <Card sx={{maxWidth: "600px", margin: "0 auto"}}>
@@ -56,7 +64,7 @@ const DietCardTotals = ({name: dietName, id}) => {
                     </form>
                     <CardActions sx={{paddingBottom: 0}}>
                         <Button size="small" onClick={handleRename}>Rename</Button>
-                        <Button size="small">Clear diet</Button>
+                        <Button size="small" onClick={handleClear}>Clear diet</Button>
                     </CardActions>
                 </CardContent>
             </Card>

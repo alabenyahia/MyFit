@@ -56,12 +56,7 @@ const EditFoodCard = ({id, dietId, name, quantity: foodQuantity, unit, protein, 
 
     }
 
-    async function handleClear() {
-        const ref = doc(firestore, "diets", dietId);
-        await updateDoc(ref, {
-            foods: []
-        });
-    }
+
 
     return (
         <div className="FoodCard">
