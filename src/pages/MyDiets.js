@@ -6,6 +6,7 @@ import {Navigate} from "react-router-dom";
 import CreateNewDiet from "../components/CreateNewDiet";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import {firestore} from "../config/firebase";
+import {Typography} from "@mui/material";
 
 const MyDiets = () => {
 
@@ -35,6 +36,7 @@ const MyDiets = () => {
             </div>
             <div className="MyDiets__DietCards">
                 {diets.map((diet) => <DietCard {...diet}/>)}
+                {diets.length===0 && <Typography variant="body1">You have no diets yet...</Typography>}
             </div>
         </div>
     );
