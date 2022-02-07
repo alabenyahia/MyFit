@@ -6,7 +6,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import {firestore} from "../config/firebase";
 
 
-const DietCardTotals = ({name: dietName, id}) => {
+const DietCardTotals = ({name: dietName, id, setFoods}) => {
     const [name, setName] = useState("")
     const [nameErr, setNameErr] = useState("")
 
@@ -45,6 +45,7 @@ const DietCardTotals = ({name: dietName, id}) => {
         await updateDoc(ref, {
             foods: []
         });
+        setFoods([])
     }
 
     return (

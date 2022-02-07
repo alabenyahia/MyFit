@@ -14,7 +14,7 @@ const Home = () => {
 
     useEffect(() => {
 
-        const q = query(collection(firestore, "foods"), where("user", "==", user.uid.toString()));
+        const q = query(collection(firestore, "foods"), where("user", "==", user?.uid.toString()));
         return onSnapshot(q, (querySnapshot) => {
             const foods = [];
             querySnapshot.forEach((doc) => {
@@ -27,7 +27,7 @@ const Home = () => {
     },[])
 
     useEffect(() => {
-        const q = query(collection(firestore, "diets"), where("user", "==", user.uid.toString()));
+        const q = query(collection(firestore, "diets"), where("user", "==", user?.uid.toString()));
         return onSnapshot(q, (querySnapshot) => {
             const diets = [];
             querySnapshot.forEach((doc) => {

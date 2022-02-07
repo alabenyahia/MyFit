@@ -52,7 +52,7 @@ const EditDiet = () => {
     return (
         <div className="EditDiet">
             <div className="EditDiet__totals">
-                <DietCardTotals name={diet[0]?.name} id={id}/>
+                <DietCardTotals name={diet[0]?.name} id={id} setFoods={setFoods}/>
             </div>
             <div className="EditDiet__FoodCards">
                 {foods.map((food) => <EditFoodCard {...food} qty={searchForQuantity(food.id)} dietId={id}/>)}
