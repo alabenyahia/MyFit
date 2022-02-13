@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/MyFit/static/css/main.d8661499.css",
-    "main.js": "/MyFit/static/js/main.c1e240bd.js",
+    "main.js": "/MyFit/static/js/main.7fc8bee5.js",
     "index.html": "/MyFit/index.html",
     "main.d8661499.css.map": "/MyFit/static/css/main.d8661499.css.map",
-    "main.c1e240bd.js.map": "/MyFit/static/js/main.c1e240bd.js.map"
+    "main.7fc8bee5.js.map": "/MyFit/static/js/main.7fc8bee5.js.map"
   },
   "entrypoints": [
     "static/css/main.d8661499.css",
-    "static/js/main.c1e240bd.js"
+    "static/js/main.7fc8bee5.js"
   ]
 }
