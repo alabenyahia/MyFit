@@ -15,7 +15,7 @@ const MyDiets = () => {
 
     useEffect(() => {
 
-        const q = query(collection(firestore, "diets"), where("user", "==", user.uid.toString()));
+        const q = query(collection(firestore, "diets"), where("user", "==", user?.uid?.toString()));
         return onSnapshot(q, (querySnapshot) => {
             const diets = [];
             querySnapshot.forEach((doc) => {

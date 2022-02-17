@@ -17,7 +17,7 @@ import "./config/firebase"
 import {UserContext} from "./context/UserContext";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "./config/firebase";
-import {HashRouter as Router} from "react-router-dom"
+import {BrowserRouter as Router} from "react-router-dom"
 import Routing from "./components/Routing";
 
 

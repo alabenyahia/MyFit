@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import Typography from "@mui/material/Typography";
 import {Card, CardContent, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../config/firebase";
 import {UserContext} from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("")
@@ -71,7 +72,8 @@ const Login = () => {
         }
     }
 
-    if (user) navigate('/')
+    
+    if (user) return <Navigate to="/" replace />
     return (
         <div className="Login">
             <Card sx={{maxWidth: "500px", margin: "50px auto"}}>

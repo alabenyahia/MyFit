@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import "./css/AddFood.css"
 import {Card, CardContent, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -8,6 +8,7 @@ import {UserContext} from "../context/UserContext";
 import {Navigate} from "react-router-dom";
 import {firestore} from "../config/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom';
 
 
 const AddFood = () => {
@@ -30,7 +31,7 @@ const AddFood = () => {
 
     const { user, setUser } = useContext(UserContext);
 
-    if (!user) return <Navigate to="/login" replace />
+    const navigate = useNavigate()
 
     function resetErrors() {
         setNameErr("")
@@ -98,6 +99,8 @@ const AddFood = () => {
         }
 
     }
+    
+    if (!user) return <Navigate to="/login" replace />
     return (
         <div className="AddFood">
             <Card sx={{maxWidth: "950px", margin: "50px auto"}}>

@@ -8,6 +8,7 @@ import {useParams} from "react-router-dom";
 import {collection, onSnapshot, query, where} from "firebase/firestore";
 import {firestore} from "../config/firebase";
 
+
 const EditDiet = () => {
 
     const { user, setUser } = useContext(UserContext);

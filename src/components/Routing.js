@@ -10,12 +10,12 @@ import EditDiet from "../pages/EditDiet";
 const Routing = () => {
     return (
         <Routes>
-            <Route path='/login' element={<Login/>}/>
-            <Route path='/register' element={<Register/>}/>
-            <Route path='/addfood' element={<AddFood/>}/>
-            <Route path='/mydiets' element={<MyDiets/>}/>
-            <Route path='/editdiet/:id' element={<EditDiet/>}/>
-            <Route path="/" element={<Home/>}/>
+            <Route path='/login' exact element={<Login/>}/>
+            <Route path='/register' exact element={<Register/>}/>
+            <Route path='/addfood' exact element={<AddFood/>}/>
+            <Route path='/mydiets' exact element={<MyDiets/>}/>
+            <Route path='/editdiet/:id' exact element={<EditDiet/>}/>
+            <Route path="/" exact element={<Home/>}/>
         </Routes>
     );
 };
